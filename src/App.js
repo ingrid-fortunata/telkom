@@ -1,25 +1,29 @@
-import logo from './logo.svg';
-import './App.css';
+import axios from "axios";
+import { useEffect, useState } from "react";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+  const [data, setdata] = useState([]);
+  const [isLoading, setisLoading] = useState(false);
+  const [isError, setisError] = useState(false);
+  const [userName, setuserName] = useState("facebook");
+
+  useEffect(() => {
+    setisLoading(true);
+    axios
+      .get(`https://api.github.com/users/${userName}/repos`)
+      .then((res) => {
+        setdata(res.data);
+        setisLoading(false);
+      })
+      .catch(() => {
+        setisError(true);
+        setisLoading(false);
+      });
+  }, [userName]);
+
+  console.log(data);
+
+  return <div className="font-bold text-blue-500">tes</div>;
 }
 
 export default App;
