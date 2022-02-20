@@ -24,10 +24,6 @@ function App() {
       });
   }, [userName]);
 
-  console.log(data);
-  console.log("loading", isLoading);
-  console.log("error", isError);
-
   const handleInput = (e) => {
     setinput(e.target.value);
   };
