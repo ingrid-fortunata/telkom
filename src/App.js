@@ -16,6 +16,7 @@ function App() {
   //       localStorage.setItem("data", res.data);
   //       setdata(res.data);
   //       setisLoading(false);
+  //       setisError(false);
   //     })
   //     .catch(() => {
   //       setisError(true);
@@ -24,6 +25,8 @@ function App() {
   // }, [userName]);
 
   console.log(data);
+  console.log("loading", isLoading);
+  console.log("error", isError);
 
   const handleInput = (e) => {
     setinput(e.target.value);
@@ -61,7 +64,7 @@ function App() {
   }
 
   return (
-    <div className="bg-stone-100 py-4 h-screen">
+    <div className="bg-stone-100 py-4 h-full">
       <div className="font-bold text-center">GitHub API</div>
       <form className="flex items-center justify-center flex-col space-y-2">
         <input
@@ -85,7 +88,13 @@ function App() {
           <div>Loading... Please wait..</div>
         </div>
       )}
-      {!isLoading && !isError && <div>{displayBody}</div>}
+      {!isLoading && <div>{displayBody}</div>}
+      {isError && !isLoading && (
+        <div className="text-center my-10 flex items-center flex-col justify-center">
+          <div className="bg-gray-500 text-white font-bold p-4 text-lg">X</div>
+          <div>Something went wrong, please try again later.</div>
+        </div>
+      )}
     </div>
   );
 }
