@@ -5,13 +5,15 @@ function App() {
   const [data, setdata] = useState([]);
   const [isLoading, setisLoading] = useState(false);
   const [isError, setisError] = useState(false);
-  const [userName, setuserName] = useState("facebook");
+  const [userName, setuserName] = useState("");
+  const [input, setinput] = useState("");
 
   useEffect(() => {
     setisLoading(true);
     axios
       .get(`https://api.github.com/users/${userName}/repos`)
       .then((res) => {
+        localStorage.setItem("data", res.data);
         setdata(res.data);
         setisLoading(false);
       })
@@ -23,7 +25,32 @@ function App() {
 
   console.log(data);
 
-  return <div className="font-bold text-blue-500">tes</div>;
+  const handleInput = (e) => {
+    setinput(e.target.value);
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setuserName(input);
+  };
+
+  return (
+    <div>
+      <div className="font-bold">GitHub API</div>
+      <form>
+        <input
+          type="text"
+          placeholder="GitHub Username"
+          id="userName"
+          onChange={(e) => handleInput(e)}
+        />
+        <button type="submit" onClick={(e) => handleSubmit(e)}>
+          Submit
+        </button>
+      </form>
+      {/* <div>{displayBody}</div> */}
+    </div>
+  );
 }
 
 export default App;
