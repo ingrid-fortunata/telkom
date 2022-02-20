@@ -52,9 +52,9 @@ function App() {
           </div>
           <div>
             <span className="font-bold mr-2">Repository URL:</span>
-            <span className="text-blue-700 hover:text-gray-700 truncate">
+            <span className="text-blue-700 hover:text-gray-700">
               <a href={obj.html_url} aria-label="url">
-                {obj.html_url}
+                <p className="truncate">{obj.html_url}</p>
               </a>
             </span>
           </div>
