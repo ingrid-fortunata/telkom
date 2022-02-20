@@ -5,24 +5,24 @@ function App() {
   const [data, setdata] = useState([]);
   const [isLoading, setisLoading] = useState(true);
   const [isError, setisError] = useState(false);
-  const [userName, setuserName] = useState("tes");
+  const [userName, setuserName] = useState("github");
   const [input, setinput] = useState("");
 
-  // useEffect(() => {
-  //   setisLoading(true);
-  //   axios
-  //     .get(`https://api.github.com/users/${userName}/repos`)
-  //     .then((res) => {
-  //       localStorage.setItem("data", res.data);
-  //       setdata(res.data);
-  //       setisLoading(false);
-  //       setisError(false);
-  //     })
-  //     .catch(() => {
-  //       setisError(true);
-  //       setisLoading(false);
-  //     });
-  // }, [userName]);
+  useEffect(() => {
+    setisLoading(true);
+    axios
+      .get(`https://api.github.com/users/${userName}/repos`)
+      .then((res) => {
+        localStorage.setItem("data", res.data);
+        setdata(res.data);
+        setisLoading(false);
+        setisError(false);
+      })
+      .catch(() => {
+        setisError(true);
+        setisLoading(false);
+      });
+  }, [userName]);
 
   console.log(data);
   console.log("loading", isLoading);
