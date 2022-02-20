@@ -3,9 +3,9 @@ import { useEffect, useState } from "react";
 
 function App() {
   const [data, setdata] = useState([]);
-  const [isLoading, setisLoading] = useState(false);
+  const [isLoading, setisLoading] = useState(true);
   const [isError, setisError] = useState(false);
-  const [userName, setuserName] = useState("");
+  const [userName, setuserName] = useState("tes");
   const [input, setinput] = useState("");
 
   // useEffect(() => {
@@ -52,7 +52,7 @@ function App() {
           </div>
           <div>
             <span className="font-bold mr-2">Repository URL:</span>
-            <span className="text-blue-700 hover:text-gray-700">
+            <span className="text-blue-700 hover:text-gray-700 truncate">
               <a href={obj.html_url} aria-label="url">
                 {obj.html_url}
               </a>
@@ -64,7 +64,10 @@ function App() {
   }
 
   return (
-    <div className="bg-stone-100 py-4 h-full">
+    <div
+      className="bg-stone-100 py-4"
+      style={isLoading || isError ? { height: "100vh" } : { height: "100%" }}
+    >
       <div className="font-bold text-center">GitHub API</div>
       <form className="flex items-center justify-center flex-col space-y-2">
         <input
